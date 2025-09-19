@@ -1,6 +1,11 @@
 package base;
 
+import com.aventstack.extentreports.ExtentReports;
+import com.aventstack.extentreports.ExtentTest;
+import org.testng.annotations.AfterSuite;
+import org.testng.annotations.BeforeSuite;
 import utils.loggerClass;
+import utils.extentReportClass;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -14,6 +19,18 @@ import java.util.Properties;
 public class testBase {
     protected WebDriver driver;
     protected Properties property;
+    protected ExtentReports extent;
+    protected ExtentTest test;
+
+    @BeforeSuite
+    protected void startReport(){
+        extent = extentReportClass.getReport();
+    }
+
+    @AfterSuite
+    protected void flushreport(){
+        extent.flush();
+    }
 
     @BeforeClass
     protected void setup() throws Exception{
