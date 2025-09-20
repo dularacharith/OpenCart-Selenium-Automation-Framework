@@ -8,10 +8,14 @@ import org.testng.annotations.Test;
 
 public class test_TC01_UserRegistration extends testBase {
 
+    registerPage rp;
+    homePage hp;
+
+
     @Test(priority = 1)
     protected void userRegistration(){
-        homePage hp = new homePage(driver);
-        registerPage rp = new registerPage(driver);
+        hp = new homePage(driver);
+        rp = new registerPage(driver);
 
         hp.clickDropdownMyAct();
         loggerClass.logInfo("Getting Account register page...");

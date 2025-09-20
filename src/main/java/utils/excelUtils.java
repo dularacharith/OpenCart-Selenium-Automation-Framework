@@ -20,7 +20,6 @@ public class excelUtils {
         workbook = new XSSFWorkbook(file);
         sheet = workbook.getSheet(sheetName);
     }
-
     // Get cell data as String
     public static String getCellData(int row,int col){
         Cell cell = sheet.getRow(row).getCell(col);
@@ -34,12 +33,10 @@ public class excelUtils {
             return "";
         }
     }
-
     // Get row count
     public static int getRowCount(){
         return sheet.getPhysicalNumberOfRows();
     }
-
     // Close Excel sheet
     public static void closeExcel() throws IOException{
         workbook.close();
