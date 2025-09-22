@@ -4,6 +4,8 @@ import base.pageBase;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.ui.ExpectedCondition;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 
 public class homePage extends pageBase {
 
@@ -11,10 +13,10 @@ public class homePage extends pageBase {
         super(driver);
     }
     //Objects
-    @FindBy(xpath = "//a[@data-bs-toggle='dropdown']//i[@class='fa-solid fa-user']")
+    @FindBy(xpath = "//span[normalize-space()='My Account']")
     private WebElement dropdownMyAct;
 
-    @FindBy(xpath = "//a[normalize-space()='Register']")
+    @FindBy(xpath = "//a[@class='dropdown-item'][normalize-space()='Register']")
     private WebElement accRegister;
 
     @FindBy(xpath = "//a[@class='dropdown-item'][normalize-space()='Login']")
@@ -22,13 +24,16 @@ public class homePage extends pageBase {
 
     //Methods
     public void clickDropdownMyAct(){
-        dropdownMyAct.click();
+        wait.until(ExpectedConditions.visibilityOf(dropdownMyAct));
+        js.executeScript("arguments[0].click();",dropdownMyAct);
     }
     public void clickAccRegister(){
-        accRegister.click();
+        wait.until(ExpectedConditions.visibilityOf(accRegister));
+        js.executeScript("arguments[0].click();",accRegister);
     }
     public void clickAccLogin(){
-        accLogin.click();
+        wait.until(ExpectedConditions.visibilityOf(accLogin));
+        js.executeScript("arguments[0].click();",accLogin);
     }
 
 }

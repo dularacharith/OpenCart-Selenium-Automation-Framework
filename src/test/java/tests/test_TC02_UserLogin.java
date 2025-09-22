@@ -21,7 +21,7 @@ public class test_TC02_UserLogin extends testBase {
     logoutPage loutp;
 
     @Test(priority = 1, dataProvider = "LoginTest" , dataProviderClass = dataProvider.class)
-    protected void userLogin(String email, String password){
+    public void userLogin(String email, String password){
 
         test = extentReportClass.createTest("Login test - "+ email);
         test.info("Test is Starting..");
@@ -40,12 +40,10 @@ public class test_TC02_UserLogin extends testBase {
         test.info("Entering email...");
         loggerClass.logInfo("Entering email...");
         lp.setInputEmail(email);
-//        lp.setInputEmail(property.getProperty("email1"));
 
         test.info("Entering password...");
         loggerClass.logInfo("Entering password...");
         lp.setInputPassword(password);
-//        lp.setInputPassword(property.getProperty("password1"));
 
         lp.clickLogin();
         loggerClass.logInfo("Login in....");
@@ -59,30 +57,10 @@ public class test_TC02_UserLogin extends testBase {
             Assert.assertTrue(ap.ismsgH1MyAccountDisplayed());
             test.pass("Logged in to the system!");
             loggerClass.logInfo("Logged in to the system!");
+            ap.clickMyAccDropDown();
+            ap.clickMyAccLogOut();
         }
     }
-    @Test(priority = 2,dependsOnMethods = {"userLogin"})
-    protected void userLogout(){
 
-        loutp = new logoutPage(driver);
-        ap = new myAccountPage(driver);
-
-        test.info("Directing to Logout");
-        loggerClass.logInfo("Directing to logout..");
-        ap.clickMyAccDropDown();
-        ap.clickMyAccLogOut();
-
-        if(loutp.validateAccountLogout()){
-            loggerClass.logInfo("Logged Out!");
-            test.pass("Logged out");
-            loutp.clickAccountLogoutCnt();
-        }
-        else {
-            test.fail("Logout Failed");
-            Assert.fail();
-        }
-
-
-    }
 
 }
