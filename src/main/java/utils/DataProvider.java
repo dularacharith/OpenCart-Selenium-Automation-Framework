@@ -32,4 +32,17 @@ public class DataProvider {
         }
         ExcelUtils.closeExcel();
         return data;
-    }}
+    }
+    @org.testng.annotations.DataProvider(name="ForgotPasswordTest")
+    public Object[][] forgotPWTest() throws IOException{
+        String filePath = "./testData/Data_Register.xlsx";
+        ExcelUtils.loadExcel(filePath, "Sheet1");
+        int rowCount = ExcelUtils.getRowCount();
+        Object[][] data = new Object[rowCount-1][1];
+        for (int i=0;i<rowCount-1;i++){
+            data[i][0] =ExcelUtils.getCellData(i+1,2);
+        }
+        ExcelUtils.closeExcel();
+        return data;
+    }
+}
