@@ -3,14 +3,14 @@
 <suite name="Default">
     <test name="Testing1">
         <classes>
-            <class name="tests.test_TC01_UserRegistration">
+            <class name="tests.Test_TC01_UserRegistration">
                 <methods>
-                    <exclude name="userRegistration"/>
+                    <include name="userRegistration"/>
                 </methods>
             </class>
-            <class name="tests.test_TC02_UserLogin">
+            <class name="tests.Test_TC02_UserLogin">
                 <methods>
-                    <include name="userLogin"/>
+                    <exclude name="userLogin"/>
                 </methods>
             </class>
         </classes>

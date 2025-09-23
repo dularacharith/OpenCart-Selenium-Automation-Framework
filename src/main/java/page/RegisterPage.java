@@ -1,14 +1,13 @@
 package page;
 
-import base.pageBase;
+import base.PageBase;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
-public class registerPage extends pageBase{
-    public registerPage(WebDriver driver){
+public class RegisterPage extends PageBase {
+    public RegisterPage(WebDriver driver){
         super(driver);
     }
 
@@ -45,35 +44,57 @@ public class registerPage extends pageBase{
 
     //Methods
     public void setInputFirstName(String firstname){
-        wait.until(ExpectedConditions.visibilityOf(inputFirstName)).sendKeys(firstname);
-    }
-    public void setInputLastName(String lastname){
-        wait.until(ExpectedConditions.visibilityOf(inputLastName)).sendKeys(lastname);
-    }
-    public void setInputEmail(String email){
-        wait.until(ExpectedConditions.visibilityOf(inputEmail)).sendKeys(email);
-    }
-    public void setInputPassword(String password){
-        wait.until(ExpectedConditions.visibilityOf(inputPassword)).sendKeys(password);;
-    }
-    public void clickCheckboxSubscribe(){
-        wait.until(ExpectedConditions.visibilityOf(checkboxSubscribe));
-        js.executeScript("arguments[0].scrollIntoView(true);arguments[1].click();",checkboxSubscribe,checkboxSubscribe);
-    }
-    public void clickPrivacyPolicyAgree(){
-        wait.until(ExpectedConditions.visibilityOf(checkboxPrivacyPolicyAgree));
-        js.executeScript("arguments[0].scrollIntoView(true);arguments[1].click();",checkboxPrivacyPolicyAgree,checkboxPrivacyPolicyAgree);
-    }
-    public void clickContinue(){
-        wait.until(ExpectedConditions.visibilityOf(btnContinue));
-        js.executeScript("arguments[0].scrollIntoView(true);arguments[1].click();",btnContinue,btnContinue);
-    }
-    public String textOfSuccessMsg (){
-        return wait.until(ExpectedConditions.visibilityOf(massageAccCreateSuccuss)).getText();
-    }
-    public void clickContinueAfterRegister(){
-        wait.until(ExpectedConditions.visibilityOf(btnContinueAfterRegister));
-        js.executeScript("arguments[0].click();",btnContinueAfterRegister);
+        PageBase.explicitWait(inputFirstName);
+        //js.executeScript("arguments[0].scrollIntoView(true);",inputFirstName);
+        inputFirstName.sendKeys(firstname);
     }
 
+    public void setInputLastName(String lastname){
+        PageBase.explicitWait(inputLastName);
+        js.executeScript("arguments[0].scrollIntoView(true);",inputLastName);
+        inputFirstName.sendKeys(lastname);
+    }
+
+    public void setInputEmail(String email){
+        PageBase.explicitWait(inputEmail);
+        js.executeScript("arguments[0].scrollIntoView(true);",inputEmail);
+        inputEmail.sendKeys(email);
+    }
+
+    public void setInputPassword(String password){
+        PageBase.explicitWait(inputPassword);
+        js.executeScript("arguments[0].scrollIntoView(true);",inputPassword);
+        inputPassword.sendKeys(password);
+    }
+
+    public void clickCheckboxSubscribe(){
+        PageBase.explicitWait(checkboxSubscribe);
+        js.executeScript("arguments[0].scrollIntoView(true);arguments[1].click();",checkboxSubscribe,checkboxSubscribe);
+    }
+
+    public void clickPrivacyPolicyAgree(){
+        PageBase.explicitWait(checkboxPrivacyPolicyAgree);
+        js.executeScript("arguments[0].scrollIntoView(true);arguments[1].click();",checkboxPrivacyPolicyAgree,checkboxPrivacyPolicyAgree);
+    }
+
+    public void clickContinue(){
+        PageBase.explicitWait(btnContinue);
+        js.executeScript("arguments[0].scrollIntoView(true);arguments[1].click();",btnContinue,btnContinue);
+    }
+
+    public String textOfSuccessMsg (){
+        try {
+            PageBase.explicitWait(massageAccCreateSuccuss);
+            return massageAccCreateSuccuss.getText();
+        }
+        catch (Exception e){
+            return "";
+        }
+
+    }
+
+    public void clickContinueAfterRegister(){
+        PageBase.explicitWait(btnContinueAfterRegister);
+        js.executeScript("arguments[0].click();",btnContinueAfterRegister);
+    }
 }

@@ -1,12 +1,11 @@
 package page;
-import base.pageBase;
+import base.PageBase;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.ui.ExpectedConditions;
 
-public class logoutPage extends pageBase {
-    public logoutPage(WebDriver driver){
+public class LogoutPage extends PageBase {
+    public LogoutPage(WebDriver driver){
         super(driver);
     }
 
@@ -18,15 +17,16 @@ public class logoutPage extends pageBase {
 
     public boolean validateAccountLogout(){
         try {
-            return wait.until(ExpectedConditions.visibilityOf(accountLogoutMsg)).isDisplayed();
+            PageBase.explicitWait(accountLogoutMsg);
+            return accountLogoutMsg.isDisplayed();
         }
         catch (Exception e){
             return false;
         }
     }
     public void clickAccountLogoutCnt(){
-        js.executeScript("arguments[0].click();",accountLogoutCnt);
+        PageBase.explicitWait(accountLogoutCnt);
+        accountLogoutCnt.click();
+//        js.executeScript("arguments[0].click();",accountLogoutCnt);
     }
-
-
 }

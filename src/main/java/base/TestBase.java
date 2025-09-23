@@ -3,8 +3,8 @@ package base;
 import com.aventstack.extentreports.ExtentReports;
 import com.aventstack.extentreports.ExtentTest;
 import org.testng.annotations.*;
-import utils.loggerClass;
-import utils.extentReportClass;
+import utils.LoggerClass;
+import utils.ExtentReportClass;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -13,7 +13,7 @@ import java.io.FileReader;
 import java.time.Duration;
 import java.util.Properties;
 
-public class testBase {
+public class TestBase {
     protected WebDriver driver;
     protected Properties property;
     protected ExtentReports extent;
@@ -21,7 +21,7 @@ public class testBase {
 
     @BeforeSuite
     protected void startReport(){
-        extent = extentReportClass.getReport();
+        extent = ExtentReportClass.getReport();
     }
 
     @AfterSuite
@@ -31,26 +31,26 @@ public class testBase {
 
     @BeforeClass
     protected void setup() throws Exception{
-        loggerClass.logInfo("Driver is Starting...");
+        LoggerClass.logInfo("Driver is Starting...");
         driver = new ChromeDriver();
         property = new Properties();
 
-        loggerClass.logInfo("Loading Property file...");
+        LoggerClass.logInfo("Loading Property file...");
         FileReader file = new FileReader("./src/test/resources/config.properties");
         property.load(file);
 
-        loggerClass.logInfo("Getting URL...");
+        LoggerClass.logInfo("Getting URL...");
         driver.get(property.getProperty("baseURL"));
         driver.manage().window().maximize();
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
-
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(2));
     }
+
     @AfterClass
     protected void tearDown(){
         if(driver!=null){
-            loggerClass.logInfo("Driver is Quiting...");
+            LoggerClass.logInfo("Driver is Quiting...");
             driver.quit();
-            loggerClass.logInfo("************************************************");
+            LoggerClass.logInfo("************************************************");
         }
     }
     @AfterMethod

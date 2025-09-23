@@ -7,7 +7,7 @@ import com.aventstack.extentreports.reporter.ExtentSparkReporter;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-public class extentReportClass {
+public class ExtentReportClass {
 
     private static ExtentTest test;
     private static ExtentReports report;

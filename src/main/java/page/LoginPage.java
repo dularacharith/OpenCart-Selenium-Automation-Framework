@@ -1,13 +1,12 @@
 package page;
 
-import base.pageBase;
+import base.PageBase;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.ui.ExpectedConditions;
 
-public class loginPage extends pageBase{
-    public loginPage(WebDriver driver){
+public class LoginPage extends PageBase {
+    public LoginPage(WebDriver driver){
         super(driver);
     }
     //Objects
@@ -28,24 +27,30 @@ public class loginPage extends pageBase{
 
     //
     public void setInputEmail(String email){
+        PageBase.explicitWait(inputEmail);
+        inputEmail.clear();
         js.executeScript("arguments[0].value=arguments[1];",inputEmail,email);
     }
     public void setInputPassword(String password){
+        PageBase.explicitWait(inputPassword);
+        inputPassword.clear();
         js.executeScript("arguments[0].value=arguments[1];",inputPassword,password);
     }
     public void clickForgetPwd(){
+        PageBase.explicitWait(linkForgotPassword);
         js.executeScript("arguments[0].click();",linkForgotPassword);
     }
     public void clickLogin(){
+        PageBase.explicitWait(btnLogin);
         js.executeScript("arguments[0].click();",btnLogin);
     }
     public boolean isLoginFailedMassageDisplayed(){
         try {
+            PageBase.explicitWait(msgLogginFailed);
             return msgLogginFailed.isDisplayed();
         }
         catch (Exception e){
             return false;
         }
-       // return wait.until(ExpectedConditions.visibilityOf(msgLogginFailed)).isDisplayed();
     }
 }
