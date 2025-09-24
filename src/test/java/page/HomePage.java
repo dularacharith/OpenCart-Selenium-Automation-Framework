@@ -4,22 +4,23 @@ import base.PageBase;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.ui.ExpectedConditions;
+import page.elements.HomePageElements;
 
 public class HomePage extends PageBase {
+
+    //Objects
+    @FindBy(xpath = HomePageElements.xpathMyAccDropdown)
+    private WebElement dropdownMyAct;
+
+    @FindBy(xpath = HomePageElements.xpathAccRegister)
+    private WebElement accRegister;
+
+    @FindBy(xpath = HomePageElements.xpathAccLogin)
+    private WebElement accLogin;
 
     public HomePage(WebDriver driver){
         super(driver);
     }
-    //Objects
-    @FindBy(xpath = "//span[normalize-space()='My Account']")
-    private WebElement dropdownMyAct;
-
-    @FindBy(xpath = "//a[@class='dropdown-item'][normalize-space()='Register']")
-    private WebElement accRegister;
-
-    @FindBy(xpath = "//a[@class='dropdown-item'][normalize-space()='Login']")
-    private WebElement accLogin;
 
     //Methods
     public void clickDropdownMyAct(){

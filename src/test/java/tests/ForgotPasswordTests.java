@@ -10,7 +10,7 @@ import utils.LoggerClass;
 import utils.ExtentReportClass;
 import utils.DataProvider;
 
-public class Test_TC03_ForgotPassword extends TestBase {
+public class ForgotPasswordTests extends TestBase {
     private HomePage homepage;
     private LoginPage loginpage;
     private ForgotPasswordPage forgotpwpage;
@@ -18,7 +18,7 @@ public class Test_TC03_ForgotPassword extends TestBase {
     @Test(priority = 1,dataProvider = "ForgotPasswordTest",dataProviderClass = DataProvider.class)
     public void forgotPassword(String email){
         test = ExtentReportClass.createTest("Forgot Password Test "+email);
-        LoggerClass.logInfo("Test Starting!");
+        LoggerClass.logInfo("Test Started!");
 
         homepage = new HomePage(driver);
         loginpage = new LoginPage(driver);
@@ -38,11 +38,15 @@ public class Test_TC03_ForgotPassword extends TestBase {
             forgotpwpage.clickContinueButton();
             Assert.assertTrue(forgotpwpage.isSuccessAlertDisplayed());
             test.pass("Email sent!");
+            TestBase.getToMainURL();
         }
         catch (AssertionError e){
             test.fail("Failed! "+e.getMessage());
+            TestBase.getToMainURL();
             throw e;
         }
+
+        LoggerClass.logInfo("Test Finished!");
 
     }
 

@@ -1,28 +1,30 @@
 package page;
 
 import base.PageBase;
+import page.elements.ForgotPasswordPageElements;
+
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
 public class ForgotPasswordPage extends PageBase {
 
-    @FindBy(xpath = "//input[@id='input-email']")
+    @FindBy(xpath = ForgotPasswordPageElements.xpathEmail)
     private WebElement inputEmail;
 
-    @FindBy(xpath = "//button[normalize-space()='Continue']")
+    @FindBy(xpath = ForgotPasswordPageElements.xpathContinue)
     private WebElement btnContinue;
 
-    @FindBy(xpath = "//a[normalize-space()='Back']")
+    @FindBy(xpath = ForgotPasswordPageElements.xpathBack )
     private WebElement btnBack;
 
-    @FindBy(xpath = "//h1[normalize-space()='Forgot Your Password?']")
+    @FindBy(xpath = ForgotPasswordPageElements.xpathForgotPwTitle)
     private WebElement titleForgotPassword;
 
-    @FindBy(xpath = "//div[@class='alert alert-danger alert-dismissible']")
+    @FindBy(xpath = ForgotPasswordPageElements.xpathErrorAlert)
     private WebElement notFoundErrorAlert;
 
-    @FindBy(xpath = "//div[@class='alert alert-success alert-dismissible']")
+    @FindBy(xpath = ForgotPasswordPageElements.xpathSuccessAlert)
     private WebElement textSuccessAlert;
 
     public ForgotPasswordPage(WebDriver driver){
@@ -34,17 +36,21 @@ public class ForgotPasswordPage extends PageBase {
         inputEmail.clear();
         inputEmail.sendKeys(email);
     }
+
     public void clickBackButton(){
         PageBase.explicitWait(btnBack);
         btnBack.click();
     }
+
     public void clickContinueButton(){
         PageBase.explicitWait(btnContinue);
         btnContinue.click();
     }
+
     public String getFPTitle(){
         return titleForgotPassword.getText();
     }
+
     public boolean isErrorAlertDisplayed(){
         try {
             return notFoundErrorAlert.isDisplayed();
@@ -52,6 +58,7 @@ public class ForgotPasswordPage extends PageBase {
             return false;
         }
     }
+
     public boolean isSuccessAlertDisplayed(){
         try {
             return textSuccessAlert.isDisplayed();

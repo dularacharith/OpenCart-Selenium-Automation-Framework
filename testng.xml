@@ -3,12 +3,12 @@
 <suite name="Default">
     <test name="Testing1">
         <classes>
-            <class name="tests.Test_TC01_UserRegistration">
+            <class name="tests.UserRegistrationTests">
                 <methods>
                     <include name="userRegistration"/>
                 </methods>
             </class>
-            <class name="tests.Test_TC02_UserLogin">
+            <class name="tests.UserLoginTests">
                 <methods>
                     <exclude name="userLogin"/>
                 </methods>

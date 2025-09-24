@@ -1,11 +1,10 @@
 package page;
 
 import base.PageBase;
-import utils.ExtentReportClass;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-
+import page.elements.MyAccountPageElements;
 
 
 public class MyAccountPage extends PageBase {
@@ -13,13 +12,13 @@ public class MyAccountPage extends PageBase {
         super(driver);
     }
     //objects
-    @FindBy(xpath = "//h1[normalize-space()='My Account']")
+    @FindBy(xpath = MyAccountPageElements.xpathMyAcctitle)
     private WebElement titleMyAccount;
 
-    @FindBy(xpath = "//span[normalize-space()='My Account']")
+    @FindBy(xpath = MyAccountPageElements.xpathMyAccDropdown)
     private WebElement myAccDropdown;
 
-    @FindBy(xpath = "//li//a[normalize-space()='Logout']")
+    @FindBy(xpath = MyAccountPageElements.xpathMyAccLogout)
     private WebElement myAccLogout;
 
     //methods

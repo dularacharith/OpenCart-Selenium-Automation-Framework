@@ -4,65 +4,71 @@ import base.PageBase;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.ui.ExpectedConditions;
+import page.elements.RegisterPageElements;
+
 
 public class RegisterPage extends PageBase {
-    public RegisterPage(WebDriver driver){
-        super(driver);
-    }
 
     //Objects
-    @FindBy(xpath = "//input[@id='input-firstname']")
+    @FindBy(xpath = RegisterPageElements.xpathFirstName)
     private WebElement inputFirstName;
 
-    @FindBy(xpath = "//input[@id='input-lastname']")
+    @FindBy(xpath = RegisterPageElements.xpathLastName)
     private WebElement inputLastName;
 
-    @FindBy(xpath = "//input[@id='input-email']")
+    @FindBy(xpath = RegisterPageElements.xpathEmail)
     private WebElement inputEmail;
 
-    @FindBy(xpath = "//input[@id='input-password']")
+    @FindBy(xpath = RegisterPageElements.xpathPassword)
     private WebElement inputPassword;
 
-    @FindBy(xpath = "//input[@id='input-newsletter']")
+    @FindBy(xpath = RegisterPageElements.xpathNewsLetter)
     private WebElement checkboxSubscribe;
 
-    @FindBy(xpath = "//input[@name='agree']")
+    @FindBy(xpath = RegisterPageElements.xpathPrivacyPolicy)
     private WebElement checkboxPrivacyPolicyAgree;
 
-    @FindBy(xpath = "//button[normalize-space()='Continue']")
+    @FindBy(xpath = RegisterPageElements.xpathContinue)
     private WebElement btnContinue;
 
-    @FindBy(xpath = "//div[@class='alert alert-danger alert-dismissible']")
+    @FindBy(xpath = RegisterPageElements.xpathAlertError)
     private WebElement alertPrivacyPolicy;
 
-    @FindBy(xpath = "//h1[text()='Your Account Has Been Created!']")
+    @FindBy(xpath = RegisterPageElements.xpathMyAccTitle)
     private WebElement massageAccCreateSuccuss;
 
-    @FindBy(xpath = "//a[normalize-space()='Continue']")
+    @FindBy(xpath = RegisterPageElements.xpathContinueAfter)
     private WebElement btnContinueAfterRegister;
+
+    public RegisterPage(WebDriver driver){
+                    super(driver);
+                }
 
     //Methods
     public void setInputFirstName(String firstname){
         PageBase.explicitWait(inputFirstName);
-        //js.executeScript("arguments[0].scrollIntoView(true);",inputFirstName);
+        inputFirstName.clear();
+        js.executeScript("arguments[0].scrollIntoView(true);",inputFirstName);
         inputFirstName.sendKeys(firstname);
     }
 
     public void setInputLastName(String lastname){
         PageBase.explicitWait(inputLastName);
+        inputLastName.clear();
         js.executeScript("arguments[0].scrollIntoView(true);",inputLastName);
-        inputFirstName.sendKeys(lastname);
+        inputLastName.sendKeys(lastname);
     }
 
     public void setInputEmail(String email){
         PageBase.explicitWait(inputEmail);
+        inputEmail.clear();
         js.executeScript("arguments[0].scrollIntoView(true);",inputEmail);
         inputEmail.sendKeys(email);
     }
 
     public void setInputPassword(String password){
         PageBase.explicitWait(inputPassword);
+        inputPassword.clear();
         js.executeScript("arguments[0].scrollIntoView(true);",inputPassword);
         inputPassword.sendKeys(password);
     }
@@ -90,11 +96,19 @@ public class RegisterPage extends PageBase {
         catch (Exception e){
             return "";
         }
-
     }
 
     public void clickContinueAfterRegister(){
         PageBase.explicitWait(btnContinueAfterRegister);
         js.executeScript("arguments[0].click();",btnContinueAfterRegister);
+    }
+
+    public boolean agreedToPrivacyPolicy(){
+        try {
+            explicitWait(alertPrivacyPolicy);
+            return alertPrivacyPolicy.isDisplayed();
+        } catch (Exception e) {
+            return false;
+        }
     }
 }

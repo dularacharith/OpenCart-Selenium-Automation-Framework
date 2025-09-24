@@ -3,16 +3,17 @@ import base.PageBase;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import page.elements.LogoutPageElements;
 
 public class LogoutPage extends PageBase {
     public LogoutPage(WebDriver driver){
         super(driver);
     }
 
-    @FindBy(xpath = "//h1[normalize-space()='Account Logout']")
+    @FindBy(xpath = LogoutPageElements.xpathLogoutMassage)
     private WebElement accountLogoutMsg;
 
-    @FindBy(xpath = "//div[@class='text-end']//a")
+    @FindBy(xpath = LogoutPageElements.xpathLogoutContinue)
     private WebElement accountLogoutCnt;
 
     public boolean validateAccountLogout(){

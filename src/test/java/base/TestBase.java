@@ -14,8 +14,8 @@ import java.time.Duration;
 import java.util.Properties;
 
 public class TestBase {
-    protected WebDriver driver;
-    protected Properties property;
+    protected static WebDriver driver;
+    protected static Properties property;
     protected ExtentReports extent;
     protected ExtentTest test;
 
@@ -35,7 +35,6 @@ public class TestBase {
         driver = new ChromeDriver();
         property = new Properties();
 
-        LoggerClass.logInfo("Loading Property file...");
         FileReader file = new FileReader("./src/test/resources/config.properties");
         property.load(file);
 
@@ -50,11 +49,11 @@ public class TestBase {
         if(driver!=null){
             LoggerClass.logInfo("Driver is Quiting...");
             driver.quit();
-            LoggerClass.logInfo("************************************************");
+            LoggerClass.logInfo("--------------------");
         }
     }
-    @AfterMethod
-    protected void refresh(){
-        driver.navigate().refresh();
+    public static void getToMainURL(){
+        driver.get(property.getProperty("baseURL"));
     }
+
 }

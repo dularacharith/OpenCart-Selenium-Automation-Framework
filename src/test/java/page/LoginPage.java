@@ -4,25 +4,26 @@ import base.PageBase;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import page.elements.LoginPageElements;
 
 public class LoginPage extends PageBase {
     public LoginPage(WebDriver driver){
         super(driver);
     }
     //Objects
-    @FindBy(xpath = "//input[@id='input-email']")
+    @FindBy(xpath = LoginPageElements.xpathEmail)
     private WebElement inputEmail;
 
-    @FindBy(xpath = "//input[@id='input-password']")
+    @FindBy(xpath = LoginPageElements.xpathPassword)
     private WebElement inputPassword;
 
-    @FindBy(xpath = "//div[@class='mb-3']//a[normalize-space()='Forgotten Password']")
+    @FindBy(xpath = LoginPageElements.xpathForgotPw)
     private WebElement linkForgotPassword;
 
-    @FindBy(xpath = "//button[text()='Login']")
+    @FindBy(xpath = LoginPageElements.xpathLoginBtn)
     private WebElement btnLogin;
 
-    @FindBy(xpath = "//div[@class='alert alert-danger alert-dismissible']")
+    @FindBy(xpath = LoginPageElements.xpathErrorAlert)
     private WebElement msgLogginFailed;
 
     //
