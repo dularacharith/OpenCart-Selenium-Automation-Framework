@@ -9,4 +9,5 @@ public class LoginPageElements {
     public static final String xpathErrorAlert = "//div[@class='alert alert-danger alert-dismissible']";
     public static final String xpathLogoutAttemptsExceed = "//div[@class='alert alert-danger alert-dismissible'][contains(text(),'Your account has')]";
     public static final String xpathSessionToken = "//div[@class='alert alert-danger alert-dismissible'][contains(text(),'Invalid token')]";
+    public static final String xpathTitleReturningCustomer = "//h2[normalize-space()='Returning Customer']";
 }

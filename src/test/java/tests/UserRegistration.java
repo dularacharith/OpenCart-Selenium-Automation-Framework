@@ -19,12 +19,12 @@ public class UserRegistration extends TestBase {
     LogoutPage logoutPage;
     MyAccountPage myAccountPage;
 
-    // VALID & INVALID lOGIN TEST
+    //VALIDATE USER REGISTRATION
     @Test(priority = 1, dataProvider = "RegisterTest", dataProviderClass = DataProvider.class)
     public void userRegistration(String fname,String lname,String email, String password){
 
-        test = ExtentReportClass.createTest("Registration Test_"+email);
-        LoggerClass.logInfo("Test Started!");
+        test = ExtentReportClass.createTest("USER REGISTRATION TEST "+email);
+        LoggerClass.logInfo("TEST STARTED! "+getClass());
 
         homePage = new HomePage(driver);
         registerPage = new RegisterPage(driver);
@@ -56,25 +56,26 @@ public class UserRegistration extends TestBase {
         registerPage.clickContinue();
 
         String acctualMassage = registerPage.textOfSuccessMsg();
-        String expectedMassage = "Your Account Has Been Created!";
+        String expectedMassage = ExpectedResults.accountCreatedMassage;
 
         try {
             Assert.assertEquals(acctualMassage,expectedMassage);
-            test.pass("Account has been created!");
+            test.pass("TEST PASSED! account has been created!");
+            LoggerClass.logInfo("TEST PASSED!");
+
             registerPage.clickContinueAfterRegister();
             myAccountPage.clickMyAccDropDown();
             myAccountPage.clickMyAccLogOut();
             logoutPage.clickAccountLogoutCnt();
+
             TestBase.getToMainURL();
         }
         catch (AssertionError e){
-            test.fail("Failed! "+e.getMessage());
+            test.fail("TEST FAILED! account not created"+e.getMessage());
+            LoggerClass.logInfo("TEST FAILED!");
             TestBase.getToMainURL();
-            throw e;
+            Assert.fail();
         }
-
-        LoggerClass.logInfo("Test Finished!");
-
-
 }
+
 }

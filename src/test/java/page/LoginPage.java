@@ -32,6 +32,8 @@ public class LoginPage extends PageBase {
     @FindBy(xpath = LoginPageElements.xpathSessionToken)
     private WebElement sessionTokenExpireMsg;
 
+    @FindBy(xpath = LoginPageElements.xpathTitleReturningCustomer)
+    private WebElement titleReturningCustomer;
 
     //
     public void setInputEmail(String email){
@@ -74,6 +76,31 @@ public class LoginPage extends PageBase {
             explicitWait(sessionTokenExpireMsg);
             return sessionTokenExpireMsg.isDisplayed();
         } catch (Exception e) {
+            return false;
+        }
+    }
+    public String placeholderTextInEmail(){
+        try{
+            explicitWait(inputEmail);
+            return inputEmail.getAttribute("placeholder");
+        } catch (Exception e) {
+            return "";
+        }
+    }
+    public String placeholderTextInPassword(){
+        try{
+            explicitWait(inputPassword);
+            return inputPassword.getAttribute("placeholder");
+        } catch (Exception e) {
+            return "";
+        }
+    }
+    public boolean isTitleReuturningCustomerDisplayed(){
+        try {
+            explicitWait(titleReturningCustomer);
+            return titleReturningCustomer.isDisplayed();
+        }
+        catch (Exception e){
             return false;
         }
     }

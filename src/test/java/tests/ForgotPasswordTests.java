@@ -2,6 +2,7 @@ package tests;
 
 import base.TestBase;
 import org.testng.Assert;
+import org.testng.annotations.AfterMethod;
 import org.testng.annotations.Test;
 import page.ForgotPasswordPage;
 import page.HomePage;
@@ -15,10 +16,11 @@ public class ForgotPasswordTests extends TestBase {
     private LoginPage loginpage;
     private ForgotPasswordPage forgotpwpage;
 
+    //VALIDATE FORGOT PASSWORD
     @Test(priority = 1,dataProvider = "ForgotPasswordTest",dataProviderClass = DataProvider.class)
     public void forgotPassword(String email){
-        test = ExtentReportClass.createTest("Forgot Password Test "+email);
-        LoggerClass.logInfo("Test Started!");
+        test = ExtentReportClass.createTest("FORGOT PASSWORD TEST "+email);
+        LoggerClass.logInfo("TEST STARTED! "+getClass());
 
         homepage = new HomePage(driver);
         loginpage = new LoginPage(driver);
@@ -30,24 +32,55 @@ public class ForgotPasswordTests extends TestBase {
         loginpage.clickForgetPwd();
 
         String acctualMassage = forgotpwpage.getFPTitle();
-        String expectedMassage = "Forgot Your Password?";
+        String expectedMassage = ExpectedResults.forgotpasswordLinkText;
 
         try {
             Assert.assertEquals(acctualMassage,expectedMassage);
             forgotpwpage.setInputEmail(email);
             forgotpwpage.clickContinueButton();
             Assert.assertTrue(forgotpwpage.isSuccessAlertDisplayed());
-            test.pass("Email sent!");
+            test.pass("TEST PASSED! email sent.");
+            LoggerClass.logInfo("TEST PASSED!");
             TestBase.getToMainURL();
         }
         catch (AssertionError e){
-            test.fail("Failed! "+e.getMessage());
+            test.fail("TEST FAILED! "+e.getMessage());
+            LoggerClass.logInfo("TEST FAILED!");
             TestBase.getToMainURL();
-            throw e;
+            Assert.fail();
+        }
+    }
+
+    //VALIDATE BACK BUTTON GO TO LOGIN PAGE
+    @Test(priority = 2)
+    public void backButtonTest(){
+        LoggerClass.logInfo("TEST STARTED! "+getClass());
+        test=ExtentReportClass.createTest("FORGOT PASSSWORD BACK BUTTON TEST");
+        homepage = new HomePage(driver);
+        loginpage = new LoginPage(driver);
+        forgotpwpage = new ForgotPasswordPage(driver);
+
+        homepage.clickDropdownMyAct();
+        homepage.clickAccLogin();
+        loginpage.clickForgetPwd();
+        forgotpwpage.clickBackButton();
+
+        try {
+            Assert.assertTrue(loginpage.isTitleReuturningCustomerDisplayed());
+            test.pass("TEST PASSED! user get back to the loginpage");
+            LoggerClass.logInfo("TEST PASSED!");
+        }
+        catch (AssertionError e){
+            test.fail("TEST FAILED! user did not get to login page.");
+            LoggerClass.logInfo("TEST FAILED!");
+            Assert.fail();
         }
 
-        LoggerClass.logInfo("Test Finished!");
+    }
 
+    @AfterMethod
+    public void getURL(){
+        TestBase.getToMainURL();
     }
 
 
