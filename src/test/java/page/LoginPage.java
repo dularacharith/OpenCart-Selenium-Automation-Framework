@@ -26,6 +26,13 @@ public class LoginPage extends PageBase {
     @FindBy(xpath = LoginPageElements.xpathErrorAlert)
     private WebElement msgLogginFailed;
 
+    @FindBy(xpath = LoginPageElements.xpathLogoutAttemptsExceed)
+    private WebElement msgLoginAttempt;
+
+    @FindBy(xpath = LoginPageElements.xpathSessionToken)
+    private WebElement sessionTokenExpireMsg;
+
+
     //
     public void setInputEmail(String email){
         PageBase.explicitWait(inputEmail);
@@ -51,6 +58,22 @@ public class LoginPage extends PageBase {
             return msgLogginFailed.isDisplayed();
         }
         catch (Exception e){
+            return false;
+        }
+    }
+    public boolean loginAttemptMassage(){
+        try {
+            explicitWait(msgLoginAttempt);
+            return msgLoginAttempt.isDisplayed();
+        } catch (Exception e) {
+            return false;
+        }
+    }
+    public boolean sessionTokenExpireMsg(){
+        try{
+            explicitWait(sessionTokenExpireMsg);
+            return sessionTokenExpireMsg.isDisplayed();
+        } catch (Exception e) {
             return false;
         }
     }
