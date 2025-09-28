@@ -75,7 +75,6 @@ public class ForgotPasswordTests extends TestBase {
             LoggerClass.logInfo("TEST FAILED!");
             Assert.fail();
         }
-
     }
 
     @AfterMethod

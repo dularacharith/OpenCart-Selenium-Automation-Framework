@@ -16,9 +16,4 @@ public class LoggerClass {
         log.debug(massage);
     }
 
-
-
-
-
-
 }
